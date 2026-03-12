@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ExercisesModule } from './exercises/exercises.module';
+
 
 @Module({
   imports: [
@@ -13,7 +13,6 @@ import { ExercisesModule } from './exercises/exercises.module';
       synchronize: true,
       logging: ['query', 'error'],
     }),
-    ExercisesModule
   ],
   controllers: [AppController],
   providers: [AppService],
