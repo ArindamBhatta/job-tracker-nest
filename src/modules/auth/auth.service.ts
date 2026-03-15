@@ -79,7 +79,7 @@ export class AuthService {
           email,
         },
         {
-          secret: 'at-secret', // In real app, use config service/env
+          secret: process.env.AT_SECRET || 'at-secret',
           expiresIn: '15m',
         },
       ),
@@ -89,7 +89,7 @@ export class AuthService {
           email,
         },
         {
-          secret: 'rt-secret', // In real app, use config service/env
+          secret: process.env.RT_SECRET || 'rt-secret',
           expiresIn: '7d',
         },
       ),
