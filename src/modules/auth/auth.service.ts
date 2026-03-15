@@ -11,7 +11,7 @@ export class AuthService {
   constructor(
     private usersService: UsersService,
     private jwtService: JwtService,
-  ) {}
+  ) { }
 
   async signup(dto: SignupDto): Promise<Tokens> {
     const existingUser = await this.usersService.findByEmail(dto.email);

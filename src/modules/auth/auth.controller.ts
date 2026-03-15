@@ -12,8 +12,8 @@ import { AuthService } from './auth.service';
 import { SignupDto } from './dto/signup.dto';
 import { LoginDto } from './dto/login.dto';
 import { Tokens } from './types/tokens.type';
-import { AtGuard } from './guards/at.guard';
-import { RtGuard } from './guards/rt.guard';
+import { AtGuard } from './guards/access_token.guard';
+import { RtGuard } from './guards/refresh_token.guard';
 
 @ApiTags('auth')
 @Controller('auth')

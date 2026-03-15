@@ -4,26 +4,30 @@ import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
 
 @Injectable()
+
 export class UsersService {
   constructor(
-    @InjectRepository(User) //gives the repository automatically.
-    private usersRepository: Repository<User>,
+    @InjectRepository(User)
+    private userRepository: Repository<User>
   ) { }
 
   async findByEmail(email: string): Promise<User | null> {
-    return this.usersRepository.findOne({ where: { email } });
+    return this.userRepository.findOne({ where: { email: email } })
   }
 
-  async findById(id: number): Promise<User | null> {
-    return this.usersRepository.findOne({ where: { id } });
+  async findById(id: number) {
+    return this.userRepository.findOne({
+      where: { id: id }
+    })
   }
 
-  async create(userData: Partial<User>): Promise<User> {
-    const user = this.usersRepository.create(userData);
-    return this.usersRepository.save(user);
+  async create(userData: Partial<User>) {
+    const user = this.userRepository.create(userData);
+    return this.userRepository.save(user)
+
   }
 
-  async update(id: number, updateData: Partial<User>): Promise<void> {
-    await this.usersRepository.update(id, updateData);
+  async update(id: number, updateDate: Partial<User>) {
+    this.userRepository.update(id, updateDate)
   }
 }

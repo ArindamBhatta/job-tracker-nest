@@ -1,6 +1,6 @@
 import { Controller, Get, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiBearerAuth, ApiOperation } from '@nestjs/swagger';
-import { AtGuard } from '../modules/auth/guards/at.guard';
+import { AtGuard } from './auth/guards/access_token.guard';
 
 @ApiTags('test')
 @Controller('test')
