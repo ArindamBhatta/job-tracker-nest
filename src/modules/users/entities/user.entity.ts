@@ -1,19 +1,53 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne, JoinColumn } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
+import { Pincode } from '../../shared/entities/pincode.entity';
 
 @Entity('users')
 export class User {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ name: 'user_id' })
   @ApiProperty({ example: 1 })
-  id: number;
+  userId: number;
+
+  @Column({ name: 'full_name' })
+  @ApiProperty({ example: 'John Doe' })
+  fullName: string;
 
   @Column({ unique: true })
   @ApiProperty({ example: 'user@example.com' })
   email: string;
 
   @Column()
+  @ApiProperty({ example: 'hashed_password' })
   password: string;
 
-  @Column({ type: 'varchar', nullable: true })
-  refreshToken?: string | null;
+  @Column()
+  @ApiProperty({ example: '1234567890' })
+  phone: string;
+
+  @Column({ name: 'date_of_birth', nullable: true })
+  @ApiProperty({ example: '1990-01-01', nullable: true })
+  dateOfBirth: string;
+
+  @Column({ name: 'aadhaar_number', unique: true })
+  @ApiProperty({ example: '1234-5678-9012' })
+  aadhaarNumber: string;
+
+  @Column()
+  @ApiProperty({ example: '123 Main St' })
+  address: string;
+
+  @ManyToOne(() => Pincode, { nullable: true })
+  @JoinColumn({ name: 'pincode' })
+  @ApiProperty({ type: () => Pincode, nullable: true })
+  pincode: Pincode | number;
+
+  @Column({ name: 'refresh_token', nullable: true })
+  @ApiProperty({ example: 'token', nullable: true })
+  refreshToken: string | null;
+
+  @CreateDateColumn({ name: 'created_at' })
+  createdAt: Date;
+
+  @UpdateDateColumn({ name: 'updated_at' })
+  updatedAt: Date;
 }

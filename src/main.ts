@@ -5,16 +5,17 @@ import { ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-
+  //Create Nest App (HTTP Server)
+  const app = await NestFactory.create(AppModule); //
+  //🛡️ 4. Global Validation Pipe
   app.useGlobalPipes(new ValidationPipe({
     whitelist: true,
     transform: true,
   }));
 
   const config = new DocumentBuilder()
-    .setTitle('Fitness App API')
-    .setDescription('The Fitness App API description')
+    .setTitle('Job Tracker App API')
+    .setDescription('The Job Tracker App API description')
     .setVersion('1.0')
     .addBearerAuth()
     .build();

@@ -1,7 +1,7 @@
 {
-  "name": "fitness-app",
+  "name": "job-tracker-app",
   "version": "0.0.1",
-  "description": "",
+  "description": "Job Tracker application with NestJS and TypeORM",
   "author": "",
   "private": true,
   "license": "UNLICENSED",

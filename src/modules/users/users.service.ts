@@ -17,7 +17,7 @@ export class UsersService {
 
   async findById(id: number) {
     return this.userRepository.findOne({
-      where: { id: id }
+      where: { userId: id }
     })
   }
 
@@ -28,6 +28,6 @@ export class UsersService {
   }
 
   async update(id: number, updateDate: Partial<User>) {
-    this.userRepository.update(id, updateDate)
+    await this.userRepository.update({ userId: id }, updateDate)
   }
 }

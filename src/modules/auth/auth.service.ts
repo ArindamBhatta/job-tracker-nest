@@ -25,8 +25,8 @@ export class AuthService {
       password: hashedPassword,
     });
 
-    const tokens = await this.getTokens(newUser.id, newUser.email);
-    await this.updateRtHash(newUser.id, tokens.refresh_token);
+    const tokens = await this.getTokens(newUser.userId, newUser.email);
+    await this.updateRtHash(newUser.userId, tokens.refresh_token);
 
     return tokens;
   }
@@ -38,8 +38,8 @@ export class AuthService {
     const passwordMatches = await bcrypt.compare(dto.password, user.password);
     if (!passwordMatches) throw new ForbiddenException('Access Denied');
 
-    const tokens = await this.getTokens(user.id, user.email);
-    await this.updateRtHash(user.id, tokens.refresh_token);
+    const tokens = await this.getTokens(user.userId, user.email);
+    await this.updateRtHash(user.userId, tokens.refresh_token);
 
     return tokens;
   }
@@ -56,8 +56,8 @@ export class AuthService {
     const rtMatches = await bcrypt.compare(rt, user.refreshToken);
     if (!rtMatches) throw new ForbiddenException('Access Denied');
 
-    const tokens = await this.getTokens(user.id, user.email);
-    await this.updateRtHash(user.id, tokens.refresh_token);
+    const tokens = await this.getTokens(user.userId, user.email);
+    await this.updateRtHash(user.userId, tokens.refresh_token);
 
     return tokens;
   }

@@ -1,19 +1,27 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
-import { UsersService } from './users.service';
-/* 
-Job: Managing the User Entity and the database.
-Responsibilities: Creating a new user record, finding a user by email, updating a user's hashed refresh token, or deleting a user.
-Knowledge: It knows about the database schema, but it does not know anything about JWT tokens, cookies, or login logic. It just manages data.
-*/
+import { JobSeeker } from './entities/job-seeker.entity';
+import { Employee } from './entities/employee.entity';
+import { Recruiter } from './entities/recruiter.entity';
+import { Certification } from './entities/certification.entity';
+import { Education } from './entities/education.entity';
+import { WorkExperience } from './entities/work-experience.entity';
+import { JobSeekerSkill } from './entities/job-seeker-skill.entity';
+
 @Module({
-  imports: [TypeOrmModule.forFeature([User])],
-  providers: [UsersService],
-  exports: [UsersService],
+  imports: [
+    TypeOrmModule.forFeature([
+      User,
+      JobSeeker,
+      Employee,
+      Recruiter,
+      Certification,
+      Education,
+      WorkExperience,
+      JobSeekerSkill,
+    ]),
+  ],
+  exports: [TypeOrmModule],
 })
-export class UsersModule {
-  //  consumer
-  //   .apply(SomeSpecificMiddleware)
-  //    .forRoutes('users'); // Only applies to routes starting with /users
-}
+export class UsersModule {}
