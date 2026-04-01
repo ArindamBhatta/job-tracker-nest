@@ -9,13 +9,18 @@ import { LoggerMiddleware } from './common/middleware/logger.middleware';
 import { CompaniesModule } from './modules/companies/companies.module';
 import { JobsModule } from './modules/jobs/jobs.module';
 import { ApplicationsModule } from './modules/applications/applications.module';
+import { CandidatesModule } from './modules/candidates/candidates.module';
 
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
-      type: 'sqlite',
-      database: 'job-tracker.sqlite',
+      type: 'postgres',
+      host: 'localhost',
+      port: 5432,
+      username: 'postgres',
+      password: '', // Assuming no password as per docker setup
+      database: 'job_tracker_db',
       autoLoadEntities: true,
       synchronize: true,
       logging: ['query', 'error'],
@@ -26,6 +31,7 @@ import { ApplicationsModule } from './modules/applications/applications.module';
     CompaniesModule,
     JobsModule,
     ApplicationsModule,
+    CandidatesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

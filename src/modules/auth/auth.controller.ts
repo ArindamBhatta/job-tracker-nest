@@ -25,7 +25,7 @@ export class AuthController {
   @ApiOperation({ summary: 'Register a new user' })
   @ApiResponse({ status: 201, description: 'User successfully registered' })
   signup(@Body() dto: SignupDto): Promise<Tokens> {
-    return this.authService.signup(dto);
+    return this.authService.signUp(dto);
   }
 
   @Post('login')

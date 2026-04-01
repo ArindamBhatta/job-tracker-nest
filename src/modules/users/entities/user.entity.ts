@@ -43,7 +43,7 @@ export class User {
   @ApiProperty({ type: () => Pincode, nullable: true })
   pincode: Pincode | number;
 
-  @Column({ name: 'refresh_token', nullable: true })
+  @Column({ name: 'refresh_token', type: 'text', nullable: true })
   @ApiProperty({ example: 'token', nullable: true })
   refreshToken: string | null;
 

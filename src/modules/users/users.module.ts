@@ -9,6 +9,8 @@ import { Education } from './entities/education.entity';
 import { WorkExperience } from './entities/work-experience.entity';
 import { JobSeekerSkill } from './entities/job-seeker-skill.entity';
 
+import { UsersService } from './users.service';
+
 @Module({
   imports: [
     TypeOrmModule.forFeature([
@@ -22,6 +24,7 @@ import { JobSeekerSkill } from './entities/job-seeker-skill.entity';
       JobSeekerSkill,
     ]),
   ],
-  exports: [TypeOrmModule],
+  providers: [UsersService],
+  exports: [UsersService, TypeOrmModule],
 })
 export class UsersModule {}
