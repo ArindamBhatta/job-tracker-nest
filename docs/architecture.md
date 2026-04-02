@@ -93,3 +93,56 @@ A Controller (The Car) needs an Engine to run. Instead of the Car building its o
 ## 7. Database & ORM
 *   **TypeORM**: The translator between your TypeScript code and the database.
 *   **SQLite**: A lightweight database file (`job-tracker.sqlite`). Tables are automatically updated when you change your `@Entity` files!
+
+---
+
+## 8. Navigation Map: Tree + Flow
+Use this as a quick map to understand where to go in the codebase.
+
+### Application tree (module/controller level)
+```text
+App
+`-- AppModule
+  |-- Imports
+  |   |-- AuthModule
+  |   |   `-- AuthController
+  |   |-- UsersModule
+  |   |-- SharedModule
+  |   |-- CompaniesModule
+  |   |-- JobsModule
+  |   `-- ApplicationsModule
+  |-- Controllers
+  |   `-- AppController
+  |-- Providers
+  |   `-- AppService
+  `-- Middleware config
+    `-- LoggerMiddleware -> forRoutes('*') (all routes)
+```
+
+### Request pipeline tree (execution order)
+```text
+HTTP Request
+`-- Middleware
+  `-- LoggerMiddleware (global in AppModule)
+    `-- Guards
+      `-- Auth/role checks (canActivate)
+        `-- Interceptors (before handler)
+          `-- Pipes
+            `-- ValidationPipe, ParseIntPipe, etc.
+              `-- Controller method (route handler)
+                `-- Service (business logic)
+                  `-- DB/Repository calls
+        `-- Interceptors (after handler, response mapping/timing)
+`-- Exception Filters (if any error is thrown)
+```
+
+### How decorators map to this
+*   **Controller routing**: `@Controller('/auth')`, `@Get()`, `@Post()`
+*   **Guard binding**: `@UseGuards(...)`
+*   **Pipe binding**: `@UsePipes(...)`, or parameter pipes like `@Param('id', ParseIntPipe)`
+*   **Interceptor binding**: `@UseInterceptors(...)`
+*   **Filter binding**: `@UseFilters(...)`
+
+### Current global configuration in this project
+*   **Global pipe**: `src/main.ts` (ValidationPipe setup)
+*   **App-wide middleware**: `src/app.module.ts` (`LoggerMiddleware` with `forRoutes('*')`)

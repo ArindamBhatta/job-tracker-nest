@@ -6,6 +6,7 @@ import { UsersModule } from '../users/users.module';
 import { AccessTokenStrategy } from './strategies/access_token.strategy';
 import { RefreshTokenStrategy } from './strategies/refresh_token.strategy';
 @Module({
+  //1. imports = which modules are included
   imports: [JwtModule.register({}), UsersModule],
   controllers: [AuthController],
   providers: [AuthService, AccessTokenStrategy, RefreshTokenStrategy],

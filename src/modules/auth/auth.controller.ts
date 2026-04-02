@@ -42,7 +42,7 @@ export class AuthController {
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Logout and invalidate refresh token' })
   logout(@Req() req: any) {
-    const user = req.user;
+    const user = req.user;// come strategy validate
     return this.authService.logout(user['sub']);
   }
   //You must have a valid Refresh Token to get new tokens.

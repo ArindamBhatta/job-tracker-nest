@@ -12,6 +12,7 @@ import { ApplicationsModule } from './modules/applications/applications.module';
 
 
 @Module({
+  //1. imports = which modules are included
   imports: [
     TypeOrmModule.forRoot({
       type: 'sqlite',
@@ -27,9 +28,12 @@ import { ApplicationsModule } from './modules/applications/applications.module';
     JobsModule,
     ApplicationsModule,
   ],
+  //2. controllers = which request handlers belong to this module
   controllers: [AppController],
+  //3. providers = which injectable classes belong to this module
   providers: [AppService],
 })
+//4. exports = which providers this module shares with other modules
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
