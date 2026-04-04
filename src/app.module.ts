@@ -15,8 +15,11 @@ import { ApplicationsModule } from './modules/applications/applications.module';
   //1. imports = which modules are included
   imports: [
     TypeOrmModule.forRoot({
-      type: 'sqlite',
-      database: 'job-tracker.sqlite',
+      type: 'postgres',
+      url: process.env.DATABASE_URL,
+      ssl: {
+        rejectUnauthorized: false,
+      },
       autoLoadEntities: true,
       synchronize: true,
       logging: ['query', 'error'],

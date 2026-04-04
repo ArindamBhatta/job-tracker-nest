@@ -92,7 +92,7 @@ A Controller (The Car) needs an Engine to run. Instead of the Car building its o
 
 ## 7. Database & ORM
 *   **TypeORM**: The translator between your TypeScript code and the database.
-*   **SQLite**: A lightweight database file (`job-tracker.sqlite`). Tables are automatically updated when you change your `@Entity` files!
+*   **PostgreSQL (Neon)**: A managed cloud PostgreSQL database. Tables are automatically updated when you change your `@Entity` files!
 
 ---
 

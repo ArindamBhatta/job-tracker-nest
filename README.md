@@ -12,7 +12,7 @@ This application helps job seekers track their applications and employers manage
 ## Tech Stack
 - **Framework**: NestJS
 - **ORM**: TypeORM
-- **Database**: SQLite (`job-tracker.sqlite`)
+- **Database**: PostgreSQL (Neon)
 - **Documentation**: Swagger/OpenAPI
 
 ## Project Setup
@@ -30,7 +30,7 @@ $ npm run start:dev
 ```
 
 ## Features for Learning
-This project was translated from a Drizzle/PostgreSQL schema to TypeORM/SQLite to demonstrate:
+This project demonstrates a TypeORM/PostgreSQL architecture using Neon to demonstrate:
 - Entity definitions and decorators.
 - Complex relations (`ManyToOne`, `OneToOne`).
 - Module organization in NestJS.

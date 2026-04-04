@@ -25,7 +25,7 @@ export class AuthController {
   @ApiOperation({ summary: 'Register a new user' })
   @ApiResponse({ status: 201, description: 'User successfully registered' })
   signup(@Body() dto: SignupDto): Promise<Tokens> {
-    return this.authService.signup(dto);
+    return this.authService.signUp(dto);
   }
 
   @Post('login')
@@ -41,9 +41,9 @@ export class AuthController {
   @HttpCode(HttpStatus.OK)
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Logout and invalidate refresh token' })
-  logout(@Req() req: any) {
+  logout(@Req() req: any) {//decoded payload
     const user = req.user;// come strategy validate
-    return this.authService.logout(user['sub']);
+    return this.authService.logout(user.sub);
   }
   //You must have a valid Refresh Token to get new tokens.
   @UseGuards(RtGuard)
@@ -53,6 +53,6 @@ export class AuthController {
   @ApiOperation({ summary: 'Refresh access token using refresh token' })
   refreshTokens(@Req() req: any) {
     const user = req.user;
-    return this.authService.refreshTokens(user['sub'], user['refreshToken']);
+    return this.authService.refreshTokens(user.sub, user.refreshToken);
   }
 }
