@@ -1,6 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne, JoinColumn } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
 import { Pincode } from '../../shared/entities/pincode.entity';
+import { UserPersona } from '../enums/user-persona.enum';
 
 @Entity('users')
 export class User {
@@ -12,7 +13,6 @@ export class User {
   @Column({ name: 'full_name' })
   @ApiProperty({ example: 'John Doe' })
   fullName: string;
-
 
   //Normal DB field
   @Column({ unique: true })
@@ -26,6 +26,14 @@ export class User {
   @Column()
   @ApiProperty({ example: '1234567890' })
   phone: string;
+
+  @Column({
+    type: 'enum',
+    enum: UserPersona,
+    default: UserPersona.JOB_SEEKER,
+  })
+  @ApiProperty({ enum: UserPersona, example: UserPersona.JOB_SEEKER })
+  persona: UserPersona;
 
   @Column({ name: 'date_of_birth', nullable: true })
   @ApiProperty({ example: '1990-01-01', nullable: true })

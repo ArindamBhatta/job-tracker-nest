@@ -7,10 +7,11 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 async function bootstrap() {
   //Create Nest App (HTTP Server)
   const app = await NestFactory.create(AppModule); //
-  //** 🛡️ 4. Global Validation Pipe
+
+  //** 🛡️ 4. Global Validation Pipe for Blocks extra data fields from entering your database.
   app.useGlobalPipes(new ValidationPipe({
     whitelist: true,
-    transform: true,
+    transform: true, //Transform is for Simplicity (turn strings into the correct types automatically).
   }));
 
   const config = new DocumentBuilder()
@@ -19,6 +20,7 @@ async function bootstrap() {
     .setVersion('1.0')
     .addBearerAuth()
     .build();
+
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('doc', app, document);
 
@@ -30,10 +32,5 @@ async function bootstrap() {
 bootstrap();
 
 /* 
-Guard = entry permission
-Pipe = input validation/transformation 🛡️ 4. Global Validation Pipe
-Interceptor = request/response wrapper behavior
-DTO = data schema/contract, not pipeline step
-
 Middleware -> Guard -> Interceptor (before) -> Pipe -> Controller -> Service -> Interceptor (after) -> Filter (if error)
 */

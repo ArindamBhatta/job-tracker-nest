@@ -58,6 +58,7 @@ export class AuthService {
     private buildAuthUser(user: User): AuthUserResponseDto {
         return {
             userId: user.userId,
+            persona: user.persona,
             fullName: user.fullName,
             email: user.email,
             phone: user.phone,
@@ -91,6 +92,7 @@ export class AuthService {
             password: hashPassword,
             phone: dto.phone,
             address: dto.address,
+            persona: dto.persona,
         });
 
         const token = await this.getTokens(newUser.userId, newUser.email);

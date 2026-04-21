@@ -1,8 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { UserPersona } from '../../users/enums/user-persona.enum';
 
 export class AuthUserResponseDto {
   @ApiProperty({ example: 1 })
   userId: number;
+
+  @ApiProperty({ enum: UserPersona, example: UserPersona.JOB_SEEKER })
+  persona: UserPersona;
 
   @ApiProperty({ example: 'John Doe' })
   fullName: string;
